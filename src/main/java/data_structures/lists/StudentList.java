@@ -1,8 +1,6 @@
 package data_structures.lists;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,9 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 @ToString
-class MyList
+@Setter
+@Getter
+class Employee
 {
     public String name;
     public int roll;
@@ -23,14 +23,21 @@ public class StudentList
 {
     public static void main(String[] args)
     {
-        ArrayList<MyList> studentList = new ArrayList<>();
-        studentList.add(new MyList("ramesh",22));
-        studentList.add(new MyList("Anek",37));
+        ArrayList<Employee> studentList = new ArrayList<>();
+        studentList.add(new Employee("ramesh",22));
+        studentList.add(new Employee("Anek",37));
+        studentList.add(new Employee("Tutsi",38));
+        studentList.add(new Employee("Anek2",32));
+        studentList.add(new Employee("Sonu",31));
         System.out.println(studentList.size());
 
         studentList.forEach(e -> System.out.println(e.name));
-        List<String> studentList2 = studentList.stream().map(item ->item.name.toUpperCase()).collect(Collectors.toList());
-        studentList2.forEach(e-> System.out.println(e));
+        studentList
+                .stream()
+                .map(item ->item)
+                .filter(item -> item.getName().contains("T") )
+                .collect(Collectors.toList())
+        .forEach(e-> System.out.println(e));
     }
 }
 
